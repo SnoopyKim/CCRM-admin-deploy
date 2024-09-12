@@ -21,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kr" className={`${pretendard.variable}`}>
-      <body className={`${pretendard.className} min-h-screen font-light`}>
+      <body
+        className={`${pretendard.className} flex h-screen font-light bg-slate-100`}
+      >
         {children}
       </body>
     </html>
