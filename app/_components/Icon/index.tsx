@@ -16,6 +16,11 @@ import {
   EyeOff,
   MoreVertical,
   Edit2,
+  SquarePen,
+  Send,
+  UserCircle,
+  Download,
+  FileSearch,
 } from "lucide-react";
 
 const iconMap = {
@@ -33,6 +38,11 @@ const iconMap = {
   "eye-off": EyeOff,
   "more-vertical": MoreVertical,
   "edit-2": Edit2,
+  "square-pen": SquarePen,
+  send: Send,
+  "user-circle": UserCircle,
+  download: Download,
+  "file-search": FileSearch,
 };
 export type IconType = keyof typeof iconMap;
 
