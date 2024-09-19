@@ -23,6 +23,9 @@ import {
   FileSearch,
   Printer,
   Trash,
+  X,
+  Plus,
+  FileImage,
 } from "lucide-react";
 
 const iconMap = {
@@ -47,6 +50,9 @@ const iconMap = {
   "file-search": FileSearch,
   printer: Printer,
   trash: Trash,
+  close: X,
+  plus: Plus,
+  "file-image": FileImage,
 };
 export type IconType = keyof typeof iconMap;
 
