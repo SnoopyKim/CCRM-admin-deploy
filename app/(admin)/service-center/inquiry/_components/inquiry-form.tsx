@@ -2,33 +2,26 @@
 
 import Icon from "@/app/_components/Icon";
 import { TextField } from "@/app/_components/Input";
+import TextAreaField from "@/app/_components/Input/area-field";
 import FileField from "@/app/_components/Input/file-field";
 import SelectField from "@/app/_components/Input/select-field";
-import Outlink from "@/app/_types/outlink";
+import Inquiry from "@/app/_types/inquiry";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function OutlinkForm({
-  outlink,
+export default function InquiryForm({
+  inquiry,
   title,
 }: {
-  outlink?: Outlink;
+  inquiry: Inquiry;
   title: string;
 }) {
-  const [formData, setFormData] = useState<Outlink>(
-    outlink ?? {
-      id: "",
-      company: "",
-      category: "청구/손해보험",
-      public: true,
-      logo: "",
-      url: "",
-      updateDate: new Date().toISOString().split("T")[0],
-    }
-  );
+  const [formData, setFormData] = useState<Inquiry>(inquiry);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     setFormData({
       ...formData,
@@ -39,15 +32,31 @@ export default function OutlinkForm({
   return (
     <form className="flex flex-col h-full">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold mb-6">{title}</h2>
+        <h2 className="text-xl font-semibold">{title}</h2>
       </div>
 
-      <div className="flex-1 space-y-4">
+      <div className="flex flex-col flex-1 space-y-4 my-6 overflow-y-scroll">
         <TextField
-          name="company"
-          label="회사명"
-          placeholder="회사명을 작성해주세요"
-          value={formData.company}
+          name="inquier"
+          label="문의자"
+          value={formData.inquirer}
+          disabled
+        />
+        <TextField
+          name="title"
+          label="제목"
+          placeholder="제목을 작성해주세요"
+          value={formData.title}
+          disabled
+        />
+
+        <TextAreaField
+          name="content"
+          label="내용"
+          placeholder="내용을 작성해주세요"
+          value={formData.content}
+          onChange={handleChange}
+          className="h-24"
           required
         />
 
@@ -57,7 +66,10 @@ export default function OutlinkForm({
             label="카테고리"
             defaultValue={formData.category}
             options={[
-              { text: "재테크/투자", value: "재테크/투자" },
+              { text: "결제 문의", value: "결제" },
+              { text: "가입 문의", value: "가입" },
+              { text: "오류 문의", value: "오류" },
+              { text: "제휴 문의", value: "제휴" },
               { text: "기타", value: "기타" },
             ]}
           />
@@ -74,9 +86,9 @@ export default function OutlinkForm({
 
         <FileField
           name="logo-file"
-          label="회사 로고파일 업로드"
+          label="파일 업로드"
           accept="image/*"
-          placeholder={formData.logo ? formData.logo : "파일을 업로드해주세요"}
+          placeholder={formData.file ? formData.file : "파일을 업로드해주세요"}
           icon="file-image"
         />
 
@@ -90,7 +102,7 @@ export default function OutlinkForm({
       </div>
       <div className="flex justify-between ">
         <Link
-          href={"/outlink"}
+          href={"/service-center/inquiry"}
           className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 font-medium"
         >
           취소하기
